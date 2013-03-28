@@ -38,7 +38,7 @@ public class BlockDimChest extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
 		if(par2 == 0)
-			return Block.obsidian.getBlockTextureFromSideAndMetadata(0, 0);
+			return linkChestSprite;
 		return Block.blockSteel.getBlockTextureFromSideAndMetadata(0, 0);
 	}
 
@@ -211,5 +211,6 @@ public class BlockDimChest extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
+		this.linkChestSprite = par1IconRegister.registerIcon("firstspring/dimchest:particlesprite");
 	}
 }
