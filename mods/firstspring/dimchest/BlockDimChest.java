@@ -187,6 +187,14 @@ public class BlockDimChest extends BlockContainer {
 	}
 	
 	@Override
+	public int damageDropped(int meta)
+	{
+		if(DimChest.doBreak && meta == 1)
+			return 0;
+		return meta;
+	}
+	
+	@Override
 	public int quantityDropped(int meta, int f, Random par1Random)
 	{
 		if(meta == 0)
