@@ -25,9 +25,9 @@ public class TileEntityDimChestRenderer extends TileEntitySpecialRenderer
 			orient = tileentitydimchest.orient;
 		}
 		if(metadata == 0)
-			this.bindTextureByName("/tofubuilders/dimchest/sprite/LinkChest.png");
+			this.bindTextureByName("/mods/firstspring/dimchest/textures/blocks/LinkChest.png");
 		if(metadata == 1)
-			this.bindTextureByName("/tofubuilders/dimchest/sprite/DimChest.png");
+			this.bindTextureByName("/mods/firstspring/dimchest/textures/blocks/DimChest.png");
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
