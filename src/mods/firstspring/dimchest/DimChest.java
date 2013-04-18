@@ -128,7 +128,7 @@ public class DimChest {
 		}
 		ItemStack craftbase1;
 		if(this.recipeBlock)
-			craftbase1 = new ItemStack(Block.blockSteel);
+			craftbase1 = new ItemStack(Block.blockIron);
 		else
 			craftbase1 = new ItemStack(Item.ingotIron);
 		ItemStack craftbase2;

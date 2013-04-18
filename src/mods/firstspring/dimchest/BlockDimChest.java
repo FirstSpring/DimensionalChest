@@ -36,10 +36,10 @@ public class BlockDimChest extends BlockContainer {
 	//破壊パーティクル用
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+	public Icon getIcon(int par1, int par2) {
 		if(par2 == 0)
 			return linkChestSprite;
-		return Block.blockSteel.getBlockTextureFromSideAndMetadata(0, 0);
+		return Block.blockIron.getIcon(0, 0);
 	}
 
 	//ブロックの方角を設定し、名前設定のGUIを開く
@@ -180,7 +180,7 @@ public class BlockDimChest extends BlockContainer {
 			return this.blockID;
 		if(DimChest.doBreak)
 			if(DimChest.recipeBlock)
-				return Block.blockSteel.blockID;
+				return Block.blockIron.blockID;
 			else
 				return Item.ingotIron.itemID;
 		return this.blockID;
