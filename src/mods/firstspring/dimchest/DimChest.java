@@ -30,7 +30,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid="DimChest", name="DimensionalChest", version="Build 2")
+@Mod(modid="DimChest", name="DimensionalChest", version="Build 3")
 //パケットハンドラの登録
 @NetworkMod(channels = {"DCClient","DCServer"}, clientSideRequired=true, serverSideRequired=true, packetHandler = PacketHandler.class)
 public class DimChest {
