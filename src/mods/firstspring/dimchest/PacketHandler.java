@@ -16,6 +16,7 @@ public class PacketHandler implements IPacketHandler {
 	@Override
 	public void onPacketData(INetworkManager network, Packet250CustomPayload packet, Player player)
 	{
+		System.out.println(packet.channel);
 		int x=0,y=0,z=0;
 		String name="";
 		int orient=0;
@@ -32,7 +33,7 @@ public class PacketHandler implements IPacketHandler {
 			try{
 				name = dat.readUTF();
 			}catch(Exception e){
-				return;
+				e.printStackTrace();
 			}
 			World world = ((EntityPlayerMP)player).worldObj;
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
@@ -45,9 +46,9 @@ public class PacketHandler implements IPacketHandler {
 		if(packet.channel.equals("DCClient")){
 			try{
 				orient = dat.readInt();
-				meta = dat.readInt();
 				hasLinkCard = dat.readBoolean();
 			}catch(Exception e){
+				e.printStackTrace();
 			}
 			World world = CommonProxy.proxy.getWorld();
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
