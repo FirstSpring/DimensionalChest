@@ -79,12 +79,26 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		name = nbt.getString("Name");
+		orient = nbt.getInteger("orient");
+		x = nbt.getInteger("chestX");
+		y = nbt.getInteger("chestY");
+		z = nbt.getInteger("chestZ");
+		dim = nbt.getInteger("chestDimension");
+		hasLinkCard = nbt.getBoolean("hasLinkCard");
+		linkCardColor = nbt.getInteger("linkCardColor");
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setString("Name", name);
+		nbt.setInteger("orient", orient);
+		nbt.setInteger("chestX", x);
+		nbt.setInteger("chestY", y);
+		nbt.setInteger("chestZ", z);
+		nbt.setInteger("chestDimension", dim);
+		nbt.setBoolean("hasLinkCard", hasLinkCard);
+		nbt.setInteger("linkCardColor", linkCardColor);
 	}
 
 	//チェストよりコピペ
