@@ -22,16 +22,16 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 
 	protected int orient;
 
-	//DimChest
+	// DimChest
 	String name = "";
-	//LinkChest
-	int x = 0,y = 0,z = 0,dim = 0,linkCardColor = 0;
+	// LinkChest
+	int x = 0, y = 0, z = 0, dim = 0, linkCardColor = 0;
 	protected boolean hasLinkCard;
 
 	@Override
 	public int getSizeInventory() {
 		IInventory inv = getInventory();
-		if(inv == null)
+		if (inv == null)
 			return 0;
 		return getInventory().getSizeInventory();
 	}
@@ -58,7 +58,7 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 
 	@Override
 	public String getInvName() {
-		if(this.blockMetadata == 0)
+		if (this.blockMetadata == 0)
 			return "container.linkchest";
 		else
 			return "container.dimchest";
@@ -71,7 +71,7 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer var1) {
-		return (this.hasLinkCard || this.blockMetadata != 0) && getInventory() != null && var1.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
+		return (this.hasLinkCard || this.blockMetadata != 0) && getInventory() != null && var1.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
 
 	}
 
@@ -101,14 +101,12 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 		nbt.setInteger("linkCardColor", linkCardColor);
 	}
 
-	//チェストよりコピペ
-	//チェストが開いたり閉じたりする処理
-	public void updateEntity()
-	{
+	// チェストよりコピペ
+	// チェストが開いたり閉じたりする処理
+	public void updateEntity() {
 		super.updateEntity();
 
-		if (++this.ticksSinceSync % 20 * 4 == 0)
-		{
+		if (++this.ticksSinceSync % 20 * 4 == 0) {
 			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, DimChest.dimChestID, 1, this.numUsingPlayers);
 		}
 
@@ -116,69 +114,60 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 		float var1 = 0.1F;
 		double var4;
 
-		if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F)
-		{
-			double var2 = (double)this.xCoord + 0.5D;
-			var4 = (double)this.zCoord + 0.5D;
-			this.worldObj.playSoundEffect(var2, (double)this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+		if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F) {
+			double var2 = (double) this.xCoord + 0.5D;
+			var4 = (double) this.zCoord + 0.5D;
+			this.worldObj.playSoundEffect(var2, (double) this.yCoord + 0.5D, var4, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
-		if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F)
-		{
+		if (this.numUsingPlayers == 0 && this.lidAngle > 0.0F || this.numUsingPlayers > 0 && this.lidAngle < 1.0F) {
 			float var8 = this.lidAngle;
 
-			if (this.numUsingPlayers > 0)
-			{
+			if (this.numUsingPlayers > 0) {
 				this.lidAngle += var1;
-			}
-			else
-			{
+			} else {
 				this.lidAngle -= var1;
 			}
 
-			if (this.lidAngle > 1.0F)
-			{
+			if (this.lidAngle > 1.0F) {
 				this.lidAngle = 1.0F;
 			}
 
 			float var3 = 0.5F;
 
-			if (this.lidAngle < var3 && var8 >= var3)
-			{
-				var4 = (double)this.xCoord + 0.5D;
-				double var6 = (double)this.zCoord + 0.5D;
-				this.worldObj.playSoundEffect(var4, (double)this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			if (this.lidAngle < var3 && var8 >= var3) {
+				var4 = (double) this.xCoord + 0.5D;
+				double var6 = (double) this.zCoord + 0.5D;
+				this.worldObj.playSoundEffect(var4, (double) this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
 			}
 
-			if (this.lidAngle < 0.0F)
-			{
+			if (this.lidAngle < 0.0F) {
 				this.lidAngle = 0.0F;
 			}
 		}
 	}
 
 	@Override
-	public void openChest()
-	{
+	public void openChest() {
 		++this.numUsingPlayers;
 		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, DimChest.dimChest.blockID, 1, this.numUsingPlayers);
 	}
 
 	@Override
-	public void closeChest(){
+	public void closeChest() {
 		--this.numUsingPlayers;
 		this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, DimChest.dimChest.blockID, 1, this.numUsingPlayers);
 	}
 
-	public IInventory getInventory(){
-		if(this.getBlockMetadata() == 0){
+	public IInventory getInventory() {
+		if (this.getBlockMetadata() == 0) {
 			World world = MinecraftServer.getServer().worldServerForDimension(dim);
 			TileEntity tile = world.getBlockTileEntity(x, y, z);
-			if(tile instanceof IInventory)
-				return (IInventory)tile;
+			if (tile instanceof IInventory)
+				return (IInventory) tile;
 			return null;
 		}
-		if(name.equals(""))
+		if (name.equals(""))
 			return InventoryManager.getInventory("Default");
 		return InventoryManager.getInventory(name);
 	}
@@ -192,43 +181,35 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 		int y = yCoord;
 		int z = zCoord;
 
-		try
-		{
+		try {
 			dos.writeInt(xCoord);
 			dos.writeInt(yCoord);
 			dos.writeInt(zCoord);
 			dos.writeInt(orient);
 			dos.writeBoolean(hasLinkCard);
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		Packet250CustomPayload packet = new Packet250CustomPayload();
 		packet.channel = "DCClient";
-		packet.data    = bos.toByteArray();
-		packet.length  = bos.size();
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
 		packet.isChunkDataPacket = true;
 
 		return packet;
 	}
 
-	public boolean receiveClientEvent(int par1, int par2)
-	{
-		if (par1 == 1)
-		{
+	public boolean receiveClientEvent(int par1, int par2) {
+		if (par1 == 1) {
 			this.numUsingPlayers = par2;
 			return true;
-		}
-		else
-		{
+		} else {
 			return super.receiveClientEvent(par1, par2);
 		}
 	}
 
-	public void invalidate()
-	{
+	public void invalidate() {
 		this.updateContainingBlockInfo();
 		super.invalidate();
 	}
@@ -239,7 +220,7 @@ public class TileEntityDimChest extends TileEntity implements IInventory {
 	}
 
 	@Override
-	public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return true;
 	}
 

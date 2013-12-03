@@ -18,8 +18,8 @@ import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.Mod.ServerStopping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -54,7 +54,7 @@ public class DimChest {
 	public static boolean isEnableModInventory;
 	public static final String[] dyeName = new String[] {"dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite"};
 
-	@PreInit
+	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		Configuration cfg = new Configuration(event.getSuggestedConfigurationFile());
 		cfg.load();
@@ -94,17 +94,17 @@ public class DimChest {
 		LanguageRegistry.addName(linkCard, "Link Card");
 		LanguageRegistry.instance().addNameForObject(linkCard, "ja_JP", "リンクカード");
 		
-		endPanel = new Item(endPanelID).setUnlocalizedName("firstspring/dimchest:endpanel").setCreativeTab(CreativeTabs.tabMaterials);
+		endPanel = new Item(endPanelID).setUnlocalizedName("endpanel").setTextureName("dimchest:endpanel").setCreativeTab(CreativeTabs.tabMaterials);
 		LanguageRegistry.addName(endPanel, "End Panel");
 		LanguageRegistry.instance().addNameForObject(endPanel, "ja_JP", "終焉の外装");
 		
-		endCircuitBoard = new Item(endCircuitBoardID).setUnlocalizedName("firstspring/dimchest:endcircuit").setCreativeTab(CreativeTabs.tabMaterials);
+		endCircuitBoard = new Item(endCircuitBoardID).setUnlocalizedName("endcircuitboard").setTextureName("dimchest:endcircuit").setCreativeTab(CreativeTabs.tabMaterials);
 		LanguageRegistry.addName(endCircuitBoard, "End Circuit Board");
 		LanguageRegistry.instance().addNameForObject(endCircuitBoard, "ja_JP", "終焉の回路基板");
 
 	}
 
-	@PostInit
+	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
 		List recipes = CraftingManager.getInstance().getRecipeList();
 		InventoryCrafting ic = new InventoryCrafting(new Container(){
@@ -162,7 +162,7 @@ public class DimChest {
 	//サーバーが停止する時に呼ばれる
 	//全インベントリの読み込みを解除
 	//
-	@ServerStopping
+	@EventHandler
 	public void unloadAll(FMLServerStoppingEvent event){
 		InventoryManager.unloadAll();
 	}

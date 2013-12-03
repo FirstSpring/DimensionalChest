@@ -8,7 +8,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -44,10 +44,10 @@ public class BlockDimChest extends BlockContainer {
 
 	//ブロックの方角を設定し、名前設定のGUIを開く
 	@Override
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack itemstack)
+	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase entity, ItemStack is)
 	{
 		byte var6 = 0;
-		int var7 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		int var7 = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
 		if (var7 == 0)
 		{
@@ -72,7 +72,7 @@ public class BlockDimChest extends BlockContainer {
 		if(tile instanceof TileEntityDimChest){
 			((TileEntityDimChest)tile).orient = var6;
 		}
-		int meta = itemstack.getItemDamage();
+		int meta = is.getItemDamage();
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 3);
 		if(meta == 1)
 			CommonProxy.proxy.openGui(par2, par3, par4);
@@ -219,6 +219,6 @@ public class BlockDimChest extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		this.linkChestSprite = par1IconRegister.registerIcon("firstspring/dimchest:particlesprite");
+		this.linkChestSprite = par1IconRegister.registerIcon("dimchest:particlesprite");
 	}
 }

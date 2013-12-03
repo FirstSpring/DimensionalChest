@@ -111,6 +111,6 @@ public class ItemLinkCard extends Item {
 		icons = new Icon[16];
 		String[] dyeColorNames = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white"};
 		for(int i = 0 ; i < 16 ; i++)
-			icons[i] = par1IconRegister.registerIcon("firstspring/dimchest:linkcard_" + dyeColorNames[i]);
+			icons[i] = par1IconRegister.registerIcon("dimchest:linkcard_" + dyeColorNames[i]);
 	}
 }
